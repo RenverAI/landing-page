@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RenderAI - Visualiza tu Reforma Antes de Ejecutarla</title>
+    <meta name="description" content="Con nuestro servicio de renders 3D con IA, puedes ver cómo quedará tu reforma antes de realizarla. Creamos visualizaciones realistas y videos animados para que tus clientes tomen decisiones confiadas y rápidas.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1e40af', // Dark blue from logo
+                        'secondary': '#10b981', // Green from logo
+                        'accent': '#3b82f6', // Bright blue
+                        'logo-blue': '#1e40af',
+                        'logo-green': '#10b981',
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 3s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'sparkle': 'sparkle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'sparkle': {
+                            '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+                            '50%': { opacity: '1', transform: 'scale(1.2)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-b border-blue-100/50 z-50 shadow-lg shadow-blue-500/10">
+        <nav class="flex justify-between items-center px-4 sm:px-6 lg:px-8 py-3 sm:py-4 max-w-7xl mx-auto">
+            <div class="flex items-center gap-2 sm:gap-4 group cursor-pointer">
+                <!-- Logo-inspired icon -->
+                <div class="relative">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                        <div class="w-4 h-4 sm:w-6 sm:h-6 relative">
+                            <!-- Room outline -->
+                            <div class="absolute inset-0 border-2 border-white rounded-sm"></div>
+                            <!-- Geometric shape -->
+                            <div class="absolute top-1 right-1 w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-br from-blue-300 to-green-300 rounded-sm opacity-80"></div>
+                        </div>
+                    </div>
+                    <!-- Sparkles -->
+                    <div class="absolute -top-1 -right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-sparkle"></div>
+                    <div class="absolute -bottom-1 -left-1 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-blue-400 rounded-full animate-sparkle delay-500"></div>
+                </div>
+                <div class="flex items-center gap-1 sm:gap-2">
+                    <span class="text-lg sm:text-xl lg:text-2xl font-black text-primary tracking-tight">Render</span>
+                    <span class="text-lg sm:text-xl lg:text-2xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">AI</span>
+                    <div class="flex gap-0.5 sm:gap-1">
+                        <div class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-green-400 rounded-full animate-sparkle"></div>
+                        <div class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-blue-400 rounded-full animate-sparkle delay-300"></div>
+                    </div>
+                </div>
+                <span class="hidden sm:block text-xs sm:text-sm text-gray-500 font-medium">by Tolino Labs</span>
+            </div>
+            <div class="hidden md:flex gap-6 lg:gap-8">
+                <a href="#features" class="relative text-gray-700 font-medium hover:text-primary transition-all duration-300 group">
+                    <span class="relative z-10">Características</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                </a>
+                <a href="#use-cases" class="relative text-gray-700 font-medium hover:text-primary transition-all duration-300 group">
+                    <span class="relative z-10">Casos de uso</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                </a>
+                <a href="#contact" class="relative text-gray-700 font-medium hover:text-primary transition-all duration-300 group">
+                    <span class="relative z-10">Contacto</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                </a>
+            </div>
+            <button class="md:hidden p-2 rounded-lg hover:bg-blue-50 transition-colors">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 min-h-screen flex items-center overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-green-50"></div>
+        <div class="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-secondary/20 to-primary/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div class="text-center lg:text-left space-y-6 lg:space-y-8">
+                <div class="space-y-4 lg:space-y-6">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[0.9] text-gray-900">
+                        Visualiza tu Reforma 
+                        <span class="block bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-gradient-x">
+                            con Inteligencia Artificial
+                        </span>
+                    </h1>
+                    <p class="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Con nuestro servicio de renders 3D con IA, puedes ver cómo quedará tu reforma antes de realizarla. 
+                        Creamos visualizaciones realistas y videos animados para que tus clientes tomen decisiones confiadas y rápidas.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                    <button class="group relative inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-2xl shadow-2xl hover:shadow-primary/25 transform hover:-translate-y-2 transition-all duration-500 overflow-hidden text-sm sm:text-base">
+                        <div class="absolute inset-0 bg-gradient-to-r from-secondary to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <span class="relative z-10 flex items-center gap-2">
+                            Ver portfolio
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <a href="mailto:renderai@tolinolabs.com?subject=Solicitud de Presupuesto RenderAI&body=Hola, me interesa solicitar un presupuesto para renders 3D con IA. Por favor, envíenme más información sobre sus servicios." class="group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-primary text-primary font-bold rounded-2xl hover:bg-primary hover:text-white transform hover:-translate-y-2 transition-all duration-500 relative overflow-hidden text-sm sm:text-base">
+                        <div class="absolute inset-0 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        <span class="relative z-10">Solicitar presupuesto</span>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-4 sm:gap-8 lg:gap-12 justify-center lg:justify-start">
+                    <div class="text-center group">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-xl sm:rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
+                            <div class="relative bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-xl border border-white/20">
+                                <span class="block text-3xl sm:text-4xl lg:text-5xl font-black text-primary leading-none mb-1 sm:mb-2">160€</span>
+                                <span class="text-xs sm:text-sm text-gray-600 font-semibold uppercase tracking-wider">desde</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center group">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-secondary/20 to-primary/20 rounded-xl sm:rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
+                            <div class="relative bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-xl border border-white/20">
+                                <span class="block text-3xl sm:text-4xl lg:text-5xl font-black text-primary leading-none mb-1 sm:mb-2">48h</span>
+                                <span class="text-xs sm:text-sm text-gray-600 font-semibold uppercase tracking-wider">entrega</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center group">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl sm:rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
+                            <div class="relative bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-xl border border-white/20">
+                                <span class="block text-2xl sm:text-3xl lg:text-4xl font-black text-green-600 leading-none mb-1 sm:mb-2">100%</span>
+                                <span class="text-xs sm:text-sm text-gray-600 font-semibold uppercase tracking-wider">garantía</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center lg:justify-end mt-8 lg:mt-0">
+                <div class="relative group w-full max-w-md lg:max-w-none">
+                    <!-- Video background glow effect -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl sm:rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-1000"></div>
+                    
+                    <!-- Video container -->
+                    <div class="relative bg-white/10 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-2 sm:p-4 shadow-2xl border border-white/30 transform group-hover:scale-105 transition-all duration-700 overflow-hidden">
+                        <!-- Video element -->
+                        <video 
+                            autoplay 
+                            muted 
+                            loop 
+                            playsinline
+                            class="w-full h-auto rounded-xl sm:rounded-2xl shadow-xl"
+                            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%236b7280' font-family='Arial' font-size='16'%3ERenderAI Video%3C/text%3E%3C/svg%3E"
+                        >
+                            <source src="render-demo.mp4" type="video/mp4">
+                            <source src="render-demo.webm" type="video/webm">
+                            <!-- Fallback for browsers that don't support video -->
+                            <div class="w-full h-48 sm:h-64 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl sm:rounded-2xl flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary to-secondary rounded-lg mx-auto mb-3 sm:mb-4 flex items-center justify-center">
+                                        <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </div>
+                                    <p class="text-primary font-bold text-sm sm:text-base">RenderAI Demo</p>
+                                    <p class="text-gray-600 text-xs sm:text-sm">Video no disponible</p>
+                                </div>
+                            </div>
+                        </video>
+                        
+                        <!-- Video overlay with branding -->
+                        <div class="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 right-2 sm:right-4">
+                            <div class="bg-black/50 backdrop-blur-sm rounded-md sm:rounded-lg p-2 sm:p-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-primary to-secondary rounded flex items-center justify-center">
+                                        <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </div>
+                                    <span class="text-white font-semibold text-xs sm:text-sm">RenderAI 3D</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Play button overlay (optional, for non-autoplay) -->
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
+                                <svg class="w-4 h-4 sm:w-6 sm:h-6 text-primary ml-0.5 sm:ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="relative py-24 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23667eea" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 lg:mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 lg:mb-6">
+                    El problema que 
+                    <span class="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">resolvemos</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">Identificamos los principales desafíos que enfrentan los profesionales y clientes en el proceso de reformas</p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <div class="group relative sm:col-span-2 lg:col-span-1">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-2xl sm:rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl text-center shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-red-100 to-orange-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
+                            <span class="text-3xl sm:text-4xl">❓</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900">Incertidumbre</h3>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Los clientes no pueden imaginar cómo quedará su reforma hasta que está terminada, generando ansiedad y dudas</p>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-yellow-500/10 to-red-500/10 rounded-2xl sm:rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl text-center shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-yellow-100 to-red-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
+                            <span class="text-3xl sm:text-4xl">💸</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900">Costes imprevistos</h3>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Cambios durante la obra que aumentan el presupuesto y retrasan la entrega, afectando la rentabilidad</p>
+                    </div>
+                </div>
+                
+                <div class="group relative sm:col-span-2 lg:col-span-1">
+                    <div class="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-2xl sm:rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl text-center shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
+                            <span class="text-3xl sm:text-4xl">😰</span>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900">Estrés</h3>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Ansiedad por no saber si el resultado final será el esperado, afectando la experiencia del cliente</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offer Section -->
+    <section class="relative py-24 bg-white overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-primary/5 to-transparent rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-r from-secondary/5 to-transparent rounded-full blur-3xl"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 lg:mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-4 lg:mb-6">
+                    Lo que incluye tu 
+                    <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">proyecto</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-6 lg:mb-8">Todo lo necesario para que tus clientes tomen decisiones confiadas y rápidas</p>
+                <div class="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-green-100 to-emerald-100 px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-green-200">
+                    <span class="text-xl sm:text-2xl">🛡️</span>
+                    <span class="text-green-800 font-bold text-sm sm:text-base">Garantía de devolución 100%</span>
+                </div>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl sm:rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-gradient-to-br from-white to-blue-50/30 p-6 sm:p-8 rounded-2xl sm:rounded-3xl text-center shadow-xl border border-blue-100/50 transform group-hover:-translate-y-3 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                            <span class="text-2xl sm:text-3xl">🖼️</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900">Hasta 3 imágenes 3D</h3>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Desde distintos ángulos del espacio, según las fotos y planos que nos proporciones</p>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl sm:rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-gradient-to-br from-white to-purple-50/30 p-6 sm:p-8 rounded-2xl sm:rounded-3xl text-center shadow-xl border border-purple-100/50 transform group-hover:-translate-y-3 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                            <span class="text-2xl sm:text-3xl">🎬</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900">Video animado</h3>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Video de 5 segundos mostrando el recorrido del render de tu reforma</p>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl sm:rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-gradient-to-br from-white to-green-50/30 p-6 sm:p-8 rounded-2xl sm:rounded-3xl text-center shadow-xl border border-green-100/50 transform group-hover:-translate-y-3 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                            <span class="text-2xl sm:text-3xl">🔄</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900">Hasta 2 alternativas</h3>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Política de cambios: Hasta 2 alternativas de diseño, con 1 cambio adicional permitido</p>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-2xl sm:rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-gradient-to-br from-white to-orange-50/30 p-6 sm:p-8 rounded-2xl sm:rounded-3xl text-center shadow-xl border border-orange-100/50 transform group-hover:-translate-y-3 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                            <span class="text-2xl sm:text-3xl">📱</span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-900">Entrega digital</h3>
+                        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Archivos listos para presentar a tus clientes o para usar en redes sociales y portafolio</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="relative py-24 bg-gradient-to-br from-primary via-secondary to-primary text-white overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+        <div class="absolute top-10 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <div class="mb-16">
+                <h2 class="text-6xl lg:text-7xl font-black mb-6">
+                    Inversión desde 
+                    <span class="bg-gradient-to-r from-green-300 to-blue-300 bg-clip-text text-transparent">160€</span>
+                </h2>
+                <p class="text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+                    Precio transparente y sin sorpresas. Incluye todo lo necesario para que tus clientes tomen decisiones confiadas con IA.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 max-w-5xl mx-auto">
+                <div class="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                    <div class="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-white font-semibold">Hasta 3 renders 3D profesionales</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                    <div class="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-white font-semibold">Video animado de 5 segundos</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                    <div class="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-white font-semibold">Hasta 2 alternativas de diseño</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                    <div class="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-white font-semibold">Entrega digital en alta calidad</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                    <div class="flex-shrink-0 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <span class="text-white font-semibold">Soporte durante todo el proceso</span>
+                </div>
+                <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-sm rounded-2xl border border-green-400/30 md:col-span-2 lg:col-span-1">
+                    <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-white font-bold">Garantía de devolución 100%</span>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <a href="mailto:renderai@tolinolabs.com?subject=Solicitud de Presupuesto RenderAI&body=Hola, me interesa solicitar un presupuesto para renders 3D con IA. Por favor, envíenme más información sobre sus servicios." class="group relative inline-flex items-center justify-center px-12 py-6 bg-white text-primary font-black text-xl rounded-2xl shadow-2xl hover:shadow-white/25 transform hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-yellow-100 to-orange-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <span class="relative z-10 flex items-center gap-3">
+                        Solicitar presupuesto
+                        <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="relative py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23667eea" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl lg:text-6xl font-black text-gray-900 mb-6">
+                    Proceso simple y 
+                    <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">transparente</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Tres pasos sencillos para transformar tu proyecto en visualizaciones profesionales</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="group relative text-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                        <div class="relative bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-primary to-secondary text-white rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <span class="text-3xl font-black">1</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-900">Envíanos tu proyecto</h3>
+                            <p class="text-gray-600 leading-relaxed">Rellena nuestro formulario de proyecto con fotos, planos y referencias de estilo</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative text-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-secondary/20 to-primary/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                        <div class="relative bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-secondary to-primary text-white rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <span class="text-3xl font-black">2</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-900">Confirmamos detalles</h3>
+                            <p class="text-gray-600 leading-relaxed">Recibimos tu información y confirmamos estilo y preferencias contigo</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative text-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                        <div class="relative bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-primary to-secondary text-white rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <span class="text-3xl font-black">3</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-900">Entrega digital</h3>
+                            <p class="text-gray-600 leading-relaxed">Producción de renders y video con entrega digital en alta calidad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="relative py-24 bg-white overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-primary/5 to-transparent rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-l from-secondary/5 to-transparent rounded-full blur-3xl"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl lg:text-6xl font-black text-gray-900 mb-6">
+                    Cómo RenderAI 
+                    <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">transforma</span> tu proceso
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Inteligencia Artificial avanzada al servicio de tu creatividad y eficiencia</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-gradient-to-br from-white to-indigo-50/30 p-8 rounded-3xl text-center shadow-xl border border-indigo-100/50 transform group-hover:-translate-y-3 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                            <span class="text-3xl">🎨</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">Renders hiperrealistas</h3>
+                        <p class="text-gray-600 leading-relaxed">Visualizaciones 3D de alta calidad que muestran cada detalle de tu reforma con precisión fotográfica</p>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-rose-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-gradient-to-br from-white to-pink-50/30 p-8 rounded-3xl text-center shadow-xl border border-pink-100/50 transform group-hover:-translate-y-3 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                            <span class="text-3xl">🎬</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">Videos inmersivos</h3>
+                        <p class="text-gray-600 leading-relaxed">Recorridos virtuales que te permiten "caminar" por tu nueva cocina o baño antes de la obra</p>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-gradient-to-br from-white to-yellow-50/30 p-8 rounded-3xl text-center shadow-xl border border-yellow-100/50 transform group-hover:-translate-y-3 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                            <span class="text-3xl">⚡</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">Entrega rápida</h3>
+                        <p class="text-gray-600 leading-relaxed">Recibe tus renders en 24-48 horas, sin retrasar el inicio de tu proyecto</p>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-gradient-to-br from-white to-emerald-50/30 p-8 rounded-3xl text-center shadow-xl border border-emerald-100/50 transform group-hover:-translate-y-3 transition-all duration-500">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                            <span class="text-3xl">🔄</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">Iteraciones ilimitadas</h3>
+                        <p class="text-gray-600 leading-relaxed">Ajusta colores, materiales y distribución hasta conseguir exactamente lo que imaginas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="relative py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23667eea" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl lg:text-6xl font-black text-gray-900 mb-6">
+                    Para profesionales y 
+                    <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">particulares</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Soluciones adaptadas a cada tipo de usuario y necesidad específica</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Reformistas</h3>
+                            <span class="bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">Principal</span>
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Presenta tus propuestas de forma profesional y gana más proyectos con visualizaciones que convencen</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Mayor tasa de cierre</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Clientes más satisfechos</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Menos cambios durante la obra</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Empresas constructoras</h3>
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Estandariza la presentación de proyectos y mejora la comunicación con tus clientes</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Procesos más eficientes</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Menor riesgo de malentendidos</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Proyectos más rentables</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Interioristas</h3>
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Comunica tus ideas de diseño de forma clara y consigue la aprobación de tus clientes</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Presentaciones impactantes</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Clientes más involucrados</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Diseños más precisos</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm p-10 rounded-3xl shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Clientes particulares</h3>
+                        </div>
+                        <p class="text-gray-600 mb-6 leading-relaxed">Visualiza tu reforma antes de empezar y toma decisiones con total confianza</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Tranquilidad total</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Decisiones informadas</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-gray-700">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-medium">Resultado garantizado</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-8">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Beneficios para tu negocio</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg border border-primary/10">
+                    <div class="text-5xl mb-4">⚡</div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Toma de decisiones más rápida</h3>
+                    <p class="text-gray-600">Tus clientes toman decisiones más rápidas y confiadas al ver exactamente cómo quedará su reforma</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg border border-primary/10">
+                    <div class="text-5xl mb-4">🎯</div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Diferenciación frente a la competencia</h3>
+                    <p class="text-gray-600">Presentaciones visuales de alto impacto que te distinguen de otros profesionales del sector</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-lg border border-primary/10">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Proceso profesional y transparente</h3>
+                    <p class="text-gray-600">Sin complicaciones, con comunicación clara y entrega puntual de todos los archivos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-8">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">La confianza que necesitas</h2>
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="text-center lg:text-left">
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-900">Primero las personas, luego la tecnología</h3>
+                    <p class="text-gray-600 mb-8 leading-relaxed">En Tolino Labs creemos que la tecnología debe servir a las personas, no al revés. RenderAI nace de entender los problemas reales de nuestros clientes y crear soluciones con IA que se entienden y se usan sin manual.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 text-gray-600">
+                            <span class="text-2xl">👂</span>
+                            <span>Escuchamos antes de construir</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-gray-600">
+                            <span class="text-2xl">🎯</span>
+                            <span>Soluciones que resuelven problemas reales</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-gray-600">
+                            <span class="text-2xl">🤝</span>
+                            <span>Fácil de usar, sin complicaciones</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-gray-600">
+                            <span class="text-2xl">💰</span>
+                            <span>Devolvemos tu dinero si no estás satisfecho</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="bg-gradient-to-r from-primary to-secondary text-white p-12 rounded-2xl text-center shadow-2xl">
+                        <div class="text-6xl mb-4">🏆</div>
+                        <p class="text-white font-semibold">Experiencia garantizada</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-20 bg-gradient-to-r from-primary to-secondary text-white text-center">
+        <div class="max-w-6xl mx-auto px-8">
+            <h2 class="text-4xl font-bold mb-4">¿Listo para transformar tu proceso de reformas?</h2>
+                <p class="text-xl text-white/90 mb-8">Únete a los profesionales que ya confían en RenderAI para generar certeza visual y tranquilidad en sus proyectos</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <a href="mailto:renderai@tolinolabs.com?subject=Solicitud de Presupuesto RenderAI&body=Hola, me interesa solicitar un presupuesto para renders 3D con IA. Por favor, envíenme más información sobre sus servicios." class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-semibold rounded-lg shadow-lg hover:bg-gray-50 transform hover:-translate-y-1 transition-all duration-300">
+                    Solicitar presupuesto
+                </a>
+                <button class="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transform hover:-translate-y-1 transition-all duration-300">
+                    Ver portfolio
+                </button>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-4 text-white/90">
+                <div class="flex items-center gap-3 font-bold text-lg">
+                    <span class="text-2xl">🛡️</span>
+                    <span>Garantía de satisfacción 100%</span>
+                </div>
+                <p class="text-center text-white/80 max-w-2xl">
+                    Si no estás completamente satisfecho con el resultado, te devolvemos el dinero sin preguntas. 
+                    Tu confianza es nuestra prioridad.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex items-center gap-2 mb-4 md:mb-0">
+                    <span class="text-xl font-extrabold text-primary">Render</span>
+                    <span class="text-xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">AI</span>
+                    <span class="text-sm text-gray-400">by Tolino Labs</span>
+                </div>
+                <div class="flex gap-8">
+                    <a href="#features" class="text-gray-400 hover:text-white transition-colors">Características</a>
+                    <a href="#use-cases" class="text-gray-400 hover:text-white transition-colors">Casos de uso</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contacto</a>
+                </div>
+            </div>
+            <div class="text-center pt-8 border-t border-gray-800">
+                <p class="text-gray-400">&copy; 2024 Tolino Labs. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
