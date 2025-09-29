@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - RenderAI | Visualizaciones 3D Profesionales</title>
+    <meta name="description" content="Descubre nuestro portfolio de renders 3D y visualizaciones arquitectónicas. Cocinas, baños, salones y más espacios transformados con IA.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#1e40af', // Dark blue from logo
+                        'secondary': '#10b981', // Green from logo
+                        'accent': '#3b82f6', // Bright blue
+                        'logo-blue': '#1e40af',
+                        'logo-green': '#10b981',
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 3s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'sparkle': 'sparkle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'sparkle': {
+                            '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+                            '50%': { opacity: '1', transform: 'scale(1.2)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-b border-blue-100/50 z-50 shadow-lg shadow-blue-500/10">
+        <nav class="flex justify-between items-center px-4 sm:px-6 lg:px-8 py-3 sm:py-4 max-w-7xl mx-auto">
+            <div class="flex items-center gap-2 sm:gap-4 group cursor-pointer">
+                <!-- Logo-inspired icon -->
+                <div class="relative">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+                        <div class="w-4 h-4 sm:w-6 sm:h-6 relative">
+                            <!-- Room outline -->
+                            <div class="absolute inset-0 border-2 border-white rounded-sm"></div>
+                            <!-- Geometric shape -->
+                            <div class="absolute top-1 right-1 w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-br from-blue-300 to-green-300 rounded-sm opacity-80"></div>
+                        </div>
+                    </div>
+                    <!-- Sparkles -->
+                    <div class="absolute -top-1 -right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-400 rounded-full animate-sparkle"></div>
+                    <div class="absolute -bottom-1 -left-1 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-blue-400 rounded-full animate-sparkle delay-500"></div>
+                </div>
+                <div class="flex items-center gap-1 sm:gap-2">
+                    <span class="text-lg sm:text-xl lg:text-2xl font-black text-primary tracking-tight">Render</span>
+                    <span class="text-lg sm:text-xl lg:text-2xl font-black bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">AI</span>
+                    <div class="flex gap-0.5 sm:gap-1">
+                        <div class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-green-400 rounded-full animate-sparkle"></div>
+                        <div class="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-blue-400 rounded-full animate-sparkle delay-300"></div>
+                    </div>
+                </div>
+                <span class="hidden sm:block text-xs sm:text-sm text-gray-500 font-medium">by Tolino Labs</span>
+            </div>
+            <div class="hidden md:flex gap-6 lg:gap-8">
+                <a href="index.html" class="relative text-gray-700 font-medium hover:text-primary transition-all duration-300 group">
+                    <span class="relative z-10">Inicio</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                </a>
+                <a href="index.html#features" class="relative text-gray-700 font-medium hover:text-primary transition-all duration-300 group">
+                    <span class="relative z-10">Características</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                </a>
+                <a href="index.html#use-cases" class="relative text-gray-700 font-medium hover:text-primary transition-all duration-300 group">
+                    <span class="relative z-10">Casos de uso</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                </a>
+                <a href="index.html#contact" class="relative text-gray-700 font-medium hover:text-primary transition-all duration-300 group">
+                    <span class="relative z-10">Contacto</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                </a>
+            </div>
+            <button class="md:hidden p-2 rounded-lg hover:bg-blue-50 transition-colors">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 min-h-screen flex items-center overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-green-50"></div>
+        <div class="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-secondary/20 to-primary/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="space-y-6 lg:space-y-8">
+                <div class="space-y-4 lg:space-y-6">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[0.9] text-gray-900">
+                        Nuestro 
+                        <span class="block bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-gradient-x">
+                            Portfolio
+                        </span>
+                    </h1>
+                    <p class="text-lg sm:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                        Descubre las <strong>transformaciones visuales</strong> que hemos creado para nuestros clientes. 
+                        Cada proyecto es una <strong>historia de éxito</strong>.
+                    </p>                    
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
+                    <a href="mailto:renderai@tolinolabs.com?subject=Consulta RenderAI&body=Hola, me interesa conocer más sobre sus servicios de renders 3D con IA. Por favor, envíenme más información." class="group inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 border-2 border-primary text-primary font-bold rounded-2xl hover:bg-primary hover:text-white transform hover:-translate-y-2 transition-all duration-500 relative overflow-hidden text-sm sm:text-base">
+                        <div class="absolute inset-0 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        <span class="relative z-10">Contactar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Categories -->
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">
+                    Nuestro 
+                    <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">portfolio</span>
+                </h2>
+                <p class="text-gray-600">Trabajos realizados con renders 3D</p>
+            </div>
+            
+            <!-- Simple Category Filter -->
+            <div class="flex justify-center gap-3 mb-6">
+                <button class="category-filter active px-4 py-2 bg-primary text-white text-sm font-medium rounded-md hover:bg-primary/90 transition-colors" data-category="all">
+                    Todos
+                </button>
+                <button class="category-filter px-4 py-2 bg-white text-gray-700 text-sm font-medium rounded-md border border-gray-200 hover:border-primary hover:text-primary transition-colors" data-category="banos">
+                    Baños
+                </button>
+                <button class="category-filter px-4 py-2 bg-white text-gray-700 text-sm font-medium rounded-md border border-gray-200 hover:border-primary hover:text-primary transition-colors" data-category="salones">
+                    Otros
+                </button>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="space-y-6" id="portfolio-grid">
+                <!-- Baño 1 - Proyecto Completo -->
+                <div class="portfolio-item" data-category="banos">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+                        <!-- Header -->
+                        <div class="p-4 border-b border-gray-100">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Baño Principal - Reforma Completa</h3>
+                            <p class="text-sm text-gray-600">Transformación completa del espacio</p>
+                        </div>
+                        
+                        <!-- Before/After Section -->
+                        <div class="p-4">
+                            <h4 class="text-sm font-semibold text-gray-900 mb-3">Antes vs Después</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <div class="aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
+                                        <img src="assets/baño1-antes.jpg" alt="Baño 1 - Antes" class="w-full h-full object-contain">
+                                    </div>
+                                    <div class="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-medium">
+                                        ANTES
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <div class="aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
+                                        <img src="assets/baño1-3.jpeg" alt="Baño 1 - Después" class="w-full h-full object-contain">
+                                    </div>
+                                    <div class="absolute top-2 left-2 bg-green-600 text-white px-2 py-1 rounded text-xs font-medium">
+                                        DESPUÉS
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Baño 2 - Proyecto Completo -->
+                <div class="portfolio-item" data-category="banos">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+                        <!-- Header -->
+                        <div class="p-4 border-b border-gray-100">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">Baño Secundario - Con Video</h3>
+                            <p class="text-sm text-gray-600">Reforma con video animado</p>
+                        </div>
+                        
+                        <!-- Before/After Section -->
+                        <div class="p-4">
+                            <h4 class="text-sm font-semibold text-gray-900 mb-3">Antes vs Después</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <div class="aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
+                                        <img src="assets/baño2-antes.jpg" alt="Baño 2 - Antes" class="w-full h-full object-contain">
+                                    </div>
+                                    <div class="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-medium">
+                                        ANTES
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <div class="aspect-[4/3] overflow-hidden rounded-md bg-gray-100">
+                                        <img src="assets/baño2-1.jpeg" alt="Baño 2 - Después" class="w-full h-full object-contain">
+                                    </div>
+                                    <div class="absolute top-2 left-2 bg-green-600 text-white px-2 py-1 rounded text-xs font-medium">
+                                        DESPUÉS
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-12 bg-gradient-to-r from-primary to-secondary text-white text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-2xl font-bold mb-3">¿Listo para tu próximo proyecto?</h2>
+            <p class="text-white/90 mb-6">Únete a nuestros clientes satisfechos y transforma tus ideas en realidad visual</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+                <a href="mailto:renderai@tolinolabs.com?subject=Consulta RenderAI&body=Hola, me interesa conocer más sobre sus servicios de renders 3D con IA. Por favor, envíenme más información." class="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-gray-50 transition-colors">
+                    Contactar
+                </a>
+                <a href="index.html" class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-colors">
+                    Volver al inicio
+                </a>
+            </div>
+            <div class="flex items-center justify-center gap-2 text-white/90">
+                <span class="text-lg">🛡️</span>
+                <span class="font-medium">Garantía de satisfacción 100%</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-6">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+                <div class="flex items-center gap-2 mb-3 md:mb-0">
+                    <span class="text-base font-extrabold text-primary">Render</span>
+                    <span class="text-base font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">AI</span>
+                    <span class="text-xs text-gray-400">by Tolino Labs</span>
+                </div>
+                <div class="flex gap-4">
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors text-xs">Inicio</a>
+                    <a href="index.html#features" class="text-gray-400 hover:text-white transition-colors text-xs">Características</a>
+                    <a href="index.html#use-cases" class="text-gray-400 hover:text-white transition-colors text-xs">Casos de uso</a>
+                    <a href="portfolio.html" class="text-gray-400 hover:text-white transition-colors text-xs">Portfolio</a>
+                    <a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors text-xs">Contacto</a>
+                </div>
+            </div>
+            <div class="text-center pt-4 border-t border-gray-800">
+                <p class="text-gray-400 text-xs">&copy; 2024 Tolino Labs. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple portfolio filter
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.category-filter');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+                        btn.classList.remove('bg-primary', 'text-white');
+                    });
+                    
+                    this.classList.add('active');
+                    this.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-200');
+                    this.classList.add('bg-primary', 'text-white');
+                    
+                    // Filter portfolio items
+                    portfolioItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
