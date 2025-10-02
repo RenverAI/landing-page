@@ -630,12 +630,14 @@
             <!-- Pricing Cards -->
             <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <!-- Basic Package -->
-                <div class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
                     <div class="text-center mb-8">
                         <h3 class="text-2xl font-bold text-gray-900 mb-2">Básico</h3>
                         <p class="text-gray-600 mb-6">Perfecto para proyectos pequeños</p>
                         <div class="mb-6">
-                            <span class="text-5xl font-black text-primary">€160</span>
+                            <span class="text-5xl font-black text-primary">160€</span>
                             <span class="text-gray-600 ml-2">por proyecto</span>
                         </div>
                     </div>
@@ -646,7 +648,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                             </div>
-                            <span>1 imágenes 3D</span>
+                            <span>1 imagen 3D de alta calidad</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-700">
                             <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
@@ -654,7 +656,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                             </div>
-                            <span>1 variación</span>
+                            <span>1 variación de diseño</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-700">
                             <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
@@ -670,16 +672,19 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                             </div>
-                            <span>Devolución gratuita</span>
+                            <span class="line-through text-gray-400" title="No disponible">Devolución gratuita</span>
                         </li>
                     </ul>
                     <a href="mailto:renderia@tolinolabs.com?subject=Solicitud Básico - €160&body=Hola, me interesa el paquete Básico por €160. Por favor, envíenme más información." class="w-full inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all duration-300">
                         Solicitar Básico
                     </a>
+                    </div>
                 </div>
 
                 <!-- Professional Package (Most Popular) -->
-                <div class="bg-white rounded-2xl p-8 shadow-xl border-2 border-primary relative">
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border-2 border-primary transform group-hover:-translate-y-2 transition-all duration-500">
                     <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
                         <span class="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">MÁS POPULAR</span>
                     </div>
@@ -687,7 +692,7 @@
                         <h3 class="text-2xl font-bold text-gray-900 mb-2">Profesional</h3>
                         <p class="text-gray-600 mb-6">Ideal para la mayoría de proyectos</p>
                         <div class="mb-6">
-                            <span class="text-5xl font-black text-primary">€190</span>
+                            <span class="text-5xl font-black text-primary">190€</span>
                             <span class="text-gray-600 ml-2">por proyecto</span>
                         </div>
                     </div>
@@ -698,7 +703,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                             </div>
-                            <span>3 imágenes 3D</span>
+                            <span>1 imágenes 3D de alta calidad</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-700">
                             <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
@@ -706,7 +711,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                             </div>
-                            <span>2 variaciones</span>
+                            <span>3 variaciones de diseño</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-700">
                             <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
@@ -736,15 +741,18 @@
                     <a href="mailto:renderia@tolinolabs.com?subject=Solicitud Profesional - €190&body=Hola, me interesa el paquete Profesional por €190. Por favor, envíenme más información." class="w-full inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-bold rounded-xl hover:shadow-lg transition-all duration-300">
                         Solicitar Profesional
                     </a>
+                    </div>
                 </div>
 
                 <!-- Premium Package -->
-                <div class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                <div class="group relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div class="relative bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 transform group-hover:-translate-y-2 transition-all duration-500">
                     <div class="text-center mb-8">
                         <h3 class="text-2xl font-bold text-gray-900 mb-2">Premium</h3>
-                        <p class="text-gray-600 mb-6">Para proyectos complejos</p>
+                        <p class="text-gray-600 mb-6">Ideal para reformas integrales</p>
                         <div class="mb-6">
-                            <span class="text-5xl font-black text-primary">€320</span>
+                            <span class="text-5xl font-black text-primary">320€</span>
                             <span class="text-gray-600 ml-2">por proyecto</span>
                         </div>
                     </div>
@@ -755,7 +763,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                             </div>
-                            <span>5 imágenes 3D</span>
+                            <span>2 imágenes 3D de alta calidad</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-700">
                             <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
@@ -763,7 +771,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                             </div>
-                            <span>3 variaciones</span>
+                            <span>3 variaciones de diseño</span>
                         </li>
                         <li class="flex items-center gap-3 text-gray-700">
                             <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
@@ -793,6 +801,7 @@
                     <a href="mailto:renderia@tolinolabs.com?subject=Solicitud Premium - €320&body=Hola, me interesa el paquete Premium por €320. Por favor, envíenme más información." class="w-full inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all duration-300">
                         Solicitar Premium
                     </a>
+                    </div>
                 </div>
             </div>
 
@@ -1035,7 +1044,7 @@
                         <div class="w-10 h-10 bg-gradient-to-r from-secondary to-primary rounded-full flex items-center justify-center text-white font-bold text-sm border-2 border-white">J</div>
                         <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-sm border-2 border-white">A</div>
                         <div class="w-10 h-10 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm border-2 border-white">+</div>
-                    </div>
+                </div>
                     <div class="text-left">
                         <p class="font-bold text-lg text-white">150+ profesionales</p>
                         <p class="text-white/80 text-sm">ya transformaron su proceso con Renderia</p>
