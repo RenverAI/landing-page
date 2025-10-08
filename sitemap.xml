@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  
+  <!-- Página principal -->
+  <url>
+    <loc>https://renver.es/</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://renver.es/assets/logo.png</image:loc>
+      <image:title>Renver - Visualizaciones 3D Profesionales</image:title>
+      <image:caption>Servicio de renders 3D para reformas y visualizaciones arquitectónicas</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://renver.es/assets/render-demo.mp4</image:loc>
+      <image:title>Video demostrativo de renders 3D</image:title>
+      <image:caption>Demostración de nuestros servicios de visualización 3D</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Página de portfolio -->
+  <url>
+    <loc>https://renver.es/portfolio.html</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://renver.es/assets/baño1-antes.jpg</image:loc>
+      <image:title>Baño antes de la reforma</image:title>
+      <image:caption>Estado original del baño antes de la transformación</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://renver.es/assets/baño1-3.jpeg</image:loc>
+      <image:title>Baño después de la reforma</image:title>
+      <image:caption>Resultado final del baño transformado con renders 3D</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://renver.es/assets/baño2-antes.jpg</image:loc>
+      <image:title>Baño secundario antes de la reforma</image:title>
+      <image:caption>Estado original del baño secundario</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://renver.es/assets/baño2-1.jpeg</image:loc>
+      <image:title>Baño secundario después de la reforma</image:title>
+      <image:caption>Resultado final del baño secundario transformado</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Secciones importantes de la página principal -->
+  <url>
+    <loc>https://renver.es/#features</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://renver.es/#pricing</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://renver.es/#contact</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://renver.es/#use-cases</loc>
+    <lastmod>2025-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

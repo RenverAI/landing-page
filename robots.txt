@@ -1,0 +1,37 @@
+User-agent: *
+Allow: /
+
+# Páginas principales
+Allow: /index.html
+Allow: /portfolio.html
+
+# Assets permitidos
+Allow: /assets/
+
+# Sitemap
+Sitemap: https://renver.es/sitemap.xml
+
+# Configuración específica para Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Configuración para otros motores de búsqueda
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+# Bloquear archivos innecesarios
+Disallow: /.DS_Store
+Disallow: /assets/.DS_Store
+Disallow: /*.log
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.env
+
+# Permitir archivos específicos importantes
+Allow: /favicon.ico
+Allow: /favicon.svg
+Allow: /assets/favicon.png
+Allow: /assets/favicon.svg
+Allow: /assets/logo.png
